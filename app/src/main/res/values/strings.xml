@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">TwoPDoist</string>
+    <string name="action_settings">Settings</string>
+
+    
+       <string name="drawer_open">TwoPDoist</string>
+    <string name="drawer_close">TwoPDoist</string>
+
+</resources>

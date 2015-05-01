@@ -1,0 +1,49 @@
+#
+# generated on 2015/05/01 09:47:53
+#
+# --table-start--
+dataClass=com.example.bahanur.model.NoteCategory
+tableName=notecategory
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=name
+# --field-end--
+# --field-start--
+fieldName=note
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.bahanur.model.Notes
+tableName=notes
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=title
+# --field-end--
+# --field-start--
+fieldName=icerik
+# --field-end--
+# --field-start--
+fieldName=tarih
+# --field-end--
+# --field-start--
+fieldName=zaman
+# --field-end--
+# --field-start--
+fieldName=categories
+foreignCollection=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
