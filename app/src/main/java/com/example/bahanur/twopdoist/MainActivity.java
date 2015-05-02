@@ -3,6 +3,7 @@ package com.example.bahanur.twopdoist;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -115,7 +116,6 @@ public class MainActivity extends Activity {
         }
 
         helper=new DatabaseHelper(getApplicationContext());
-        addNoteCategory();
 
     }
 
@@ -175,11 +175,8 @@ public class MainActivity extends Activity {
                         .get(possition).getImgResID());
                 break;
             case 9:
-                fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
+                Intent myIntent = new Intent(MainActivity.this, NoteActivity.class);
+                startActivity(myIntent);
                 break;
             case 10:
                 fragment = new FragmentTwo();
@@ -226,16 +223,6 @@ public class MainActivity extends Activity {
             default:
                 break;
         }
-
-        fragment.setArguments(args);
-        FragmentManager frgManager = getFragmentManager();
-        frgManager.beginTransaction().replace(R.id.content_frame, fragment)
-                .commit();
-
-        mDrawerList.setItemChecked(possition, true);
-        setTitle(dataList.get(possition).getItemName());
-        mDrawerLayout.closeDrawer(mDrawerList);
-
     }
 
     @Override
@@ -268,23 +255,6 @@ public class MainActivity extends Activity {
 
         return false;
     }
-
-    private void addNoteCategory(){
-        helper= OpenHelperManager.getHelper(this,DatabaseHelper.class);
-        RuntimeExceptionDao<NoteCategory,Integer> noteCategorieDao=helper.getNoteCategoryRuntimeExceptionDao();
-        noteCategorieDao.create(new NoteCategory("work"));
-        noteCategorieDao.create(new NoteCategory("personal"));
-
-       List<NoteCategory> categories =  noteCategorieDao.queryForAll();
-       for(NoteCategory c : categories){
-           Log.d("demo", c.getId() + "  " + c.getName());
-       }
-        OpenHelperManager.releaseHelper();
-
-    }
-
-
-
     private class DrawerItemClickListener implements
             ListView.OnItemClickListener {
         @Override

@@ -14,5 +14,8 @@
     <string name="save_menu_noteedit">Save</string>
 
     <string name="delete_menu_noteedit">Delete</string>
+    <string name="title_activity_note">NoteActivity</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>
