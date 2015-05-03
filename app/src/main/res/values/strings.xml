@@ -17,5 +17,6 @@
     <string name="title_activity_note">NoteActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_not_edit">NotEditActivity</string>
 
 </resources>

@@ -1,18 +1,17 @@
 package com.example.bahanur.twopdoist;
 
 import android.app.Activity;
-import android.content.Context;
-import android.database.Cursor;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import com.example.bahanur.dao.NoteDao;
+import com.example.bahanur.model.Notes;
+
+import java.util.Date;
 
 
 public class NotEditActivity extends Activity {
@@ -22,51 +21,29 @@ public class NotEditActivity extends Activity {
     public static String curText = "";
     private EditText mTitleText;
     private EditText mBodyText;
-    private TextView mDateText;
-
-    private Cursor note;
-    public static class LineEditText extends EditText {
-        // we need this constructor for LayoutInflater
-        public LineEditText(Context context, AttributeSet attrs) {
-            super(context, attrs);
-            mRect = new Rect();
-            mPaint = new Paint();
-            mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
-            mPaint.setColor(Color.BLUE);
-        }
-
-        private Rect mRect;
-        private Paint mPaint;
-
-        @Override
-        protected void onDraw(Canvas canvas) {
-
-            int height = getHeight();
-            int line_height = getLineHeight();
-
-            int count = height / line_height;
-
-            if (getLineCount() > count)
-                count = getLineCount();
-
-            Rect r = mRect;
-            Paint paint = mPaint;
-            int baseline = getLineBounds(0, r);
-
-            for (int i = 0; i < count; i++) {
-
-                canvas.drawLine(r.left, baseline + 1, r.right, baseline + 1, paint);
-                baseline += getLineHeight();
-
-                super.onDraw(canvas);
-            }
-
-        }
-    }
+    private Button saveButton;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_not_edit);
+        mTitleText = (EditText)findViewById(R.id.noteTitle);
+        mBodyText = (EditText) findViewById(R.id.notedesc);
+        saveButton = (Button) findViewById(R.id.savenote);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Notes note = new Notes();
+                note.setTitle(mTitleText.getText().toString());
+                note.setIcerik(mBodyText.getText().toString());
+                note.setTarih(new Date());
+                note.setCategorie("work");
+                note.setZaman("Deneme");
+                NoteDao dao = new NoteDao(getApplicationContext());
+                dao.addNote(note);
+                finish();
+            }
+        });
+
     }
 
 

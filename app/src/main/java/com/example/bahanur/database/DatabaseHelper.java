@@ -25,6 +25,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<NoteCategory,Integer> noteCategoryDao=null;
     private RuntimeExceptionDao<NoteCategory,Integer> noteCategoryRuntimeExceptionDao=null;
 
+    private Dao<Notes,Integer> noteDao=null;//Note için dao oluşturdum
+    private RuntimeExceptionDao<Notes,Integer> noteRuntimeExceptionDao=null;//Run time exception oluşturdum
+
     public  DatabaseHelper(Context context ){
         super(context,DATABASE_NAME,null,DATABASE_VERSION, R.raw.ormlite_config);
     }
@@ -71,12 +74,28 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
         return noteCategoryDao;
     }
 
+
+
     public RuntimeExceptionDao<NoteCategory,Integer> getNoteCategoryRuntimeExceptionDao(){
         if(noteCategoryRuntimeExceptionDao==null)
         {
             noteCategoryRuntimeExceptionDao=getRuntimeExceptionDao(NoteCategory.class);
         }
         return noteCategoryRuntimeExceptionDao;
+    }
+
+    public Dao<Notes,Integer> getNotesDao() throws SQLException{
+        if(noteDao==null){
+            noteDao=getDao(Notes.class);
+        }
+        return noteDao;
+    }
+
+    public  RuntimeExceptionDao<Notes,Integer>getNoteRuntimeExceptionDao(){
+        if(noteRuntimeExceptionDao==null){
+            noteRuntimeExceptionDao=getRuntimeExceptionDao(Notes.class); //parametre verince hata veriyo
+        }
+        return noteRuntimeExceptionDao;
     }
 
 }

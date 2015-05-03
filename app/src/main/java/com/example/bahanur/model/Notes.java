@@ -1,8 +1,6 @@
 package com.example.bahanur.model;
 
-import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.field.ForeignCollectionField;
 
 import java.util.Date;
 
@@ -21,12 +19,17 @@ public class Notes {
     Date tarih;
     @DatabaseField
     String zaman;
-    @ForeignCollectionField
-    ForeignCollection<NoteCategory> categories;
+    @DatabaseField
+    String categorie;
 
     public Notes(){
     }
-
+    public Notes(String title, String icerik, Date tarih, String categorie ){
+        this.categorie = categorie;
+        this.title = title;
+        this.icerik = icerik;
+        this.tarih = tarih;
+    }
     public Integer getId() {
         return id;
     }
@@ -67,13 +70,11 @@ public class Notes {
         this.zaman = zaman;
     }
 
-    public ForeignCollection<NoteCategory> getCategories() {
-        return categories;
+    public String getCategorie() {
+        return categorie;
     }
 
-    public void setCategories(ForeignCollection<NoteCategory> categories) {
-        this.categories = categories;
+    public void setCategorie(String categorie) {
+        this.categorie = categorie;
     }
-
-
 }

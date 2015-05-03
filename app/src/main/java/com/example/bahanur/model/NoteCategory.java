@@ -11,8 +11,6 @@ public class NoteCategory {
     @DatabaseField
     String name;
 
-    @DatabaseField(foreign = true,foreignAutoRefresh = true)
-    Notes  note;
     public NoteCategory(){
     }
 
@@ -34,14 +32,6 @@ public class NoteCategory {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Notes getNote() {
-        return note;
-    }
-
-    public void setNote(Notes note) {
-        this.note = note;
     }
 
     public String toString()

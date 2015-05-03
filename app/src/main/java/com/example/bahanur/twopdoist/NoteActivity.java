@@ -11,8 +11,10 @@ import android.widget.ListView;
 
 import com.example.bahanur.adapters.NoteAdapter;
 import com.example.bahanur.dao.NoteCategoryDao;
-import com.example.bahanur.model.NoteCategory;
+import com.example.bahanur.dao.NoteDao;
+import com.example.bahanur.model.Notes;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -29,7 +31,14 @@ public class NoteActivity extends Activity {
         }catch (Exception ex){
             ex.printStackTrace();
         }
-
+        Button button=(Button)findViewById(R.id.addnotebutton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),NotEditActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void insertNoteCategory(){
@@ -45,13 +54,11 @@ public class NoteActivity extends Activity {
         return true;
     }
 
-    private  NoteAdapter getNoteCategories(){
-        NoteCategoryDao noteCategoryDao = new NoteCategoryDao(getApplicationContext());
-        List<NoteCategory> noteCategories = noteCategoryDao.getNoteCategories();
-        String[] from = new String[]{"name"};
-        int[] to = new int[]{R.id.row};
-        NoteAdapter adapter = new  NoteAdapter(this,noteCategories);
-        adapter.addAll(noteCategories);
+    private  NoteAdapter getNoteCategories() throws SQLException {
+        NoteDao noteDao = new NoteDao(getApplicationContext());
+        List<Notes> noteList = noteDao.getNotes("work");
+        NoteAdapter adapter = new  NoteAdapter(this,noteList);
+        adapter.addAll(noteList);
         return adapter;
     }
 
@@ -69,13 +76,5 @@ public class NoteActivity extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
-    private class ButtonOnClickListener implements Button.OnClickListener
-    {
 
-        @Override
-        public void onClick(View v) {
-            Intent myIntent = new Intent(NoteActivity.this, NotEditActivity.class);
-            startActivity(myIntent);
-        }
-    }
 }
