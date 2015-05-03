@@ -1,19 +1,19 @@
 package com.example.bahanur.twopdoist;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 
 import com.example.bahanur.adapters.NoteAdapter;
 import com.example.bahanur.dao.NoteCategoryDao;
 import com.example.bahanur.model.NoteCategory;
 
 import java.util.List;
-import java.util.SimpleTimeZone;
 
 
 public class NoteActivity extends Activity {
@@ -68,5 +68,14 @@ public class NoteActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    private class ButtonOnClickListener implements Button.OnClickListener
+    {
+
+        @Override
+        public void onClick(View v) {
+            Intent myIntent = new Intent(NoteActivity.this, NotEditActivity.class);
+            startActivity(myIntent);
+        }
     }
 }

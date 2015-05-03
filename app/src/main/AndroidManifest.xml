@@ -26,6 +26,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.bahanur.twopdoist.MainActivity" />
         </activity>
+        <activity
+            android:name=".NotEditActivity"
+            android:label="@string/title_activity_not_edit"
+            android:parentActivityName=".NoteActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.bahanur.twopdoist.NoteActivity" />
+        </activity>
     </application>
 
 </manifest>
