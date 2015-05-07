@@ -2,14 +2,12 @@ package com.example.bahanur.twopdoist;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,9 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.bahanur.database.DatabaseHelper;
-import com.example.bahanur.model.NoteCategory;
-import com.j256.ormlite.android.apptools.OpenHelperManager;
-import com.j256.ormlite.dao.RuntimeExceptionDao;
+import com.example.bahanur.singleton.Singleton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -130,6 +126,11 @@ public class MainActivity extends Activity {
 
         Fragment fragment = null;
         Bundle args = new Bundle();
+        Intent myIntent;
+
+
+
+
         switch (possition) {
 
             case 2:
@@ -174,16 +175,15 @@ public class MainActivity extends Activity {
                 args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList
                         .get(possition).getImgResID());
                 break;
-            case 9:
-                Intent myIntent = new Intent(MainActivity.this, NoteActivity.class);
+            case 9: //projectsteki works
+                Singleton.getInstance().setCategories("work");
+                myIntent = new Intent(MainActivity.this, NoteActivity.class);
                 startActivity(myIntent);
                 break;
-            case 10:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
+            case 10: //projectsteki shopping mi ona bakalım !
+                Singleton.getInstance().setCategories("shopping");
+                 myIntent=new Intent(MainActivity.this,NoteActivity.class);
+                startActivity(myIntent);
                 break;
             case 11:
                 fragment = new FragmentThree();

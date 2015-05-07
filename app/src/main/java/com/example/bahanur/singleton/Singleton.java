@@ -7,6 +7,13 @@ import com.example.bahanur.model.Notes;
  */
 public class Singleton {
     private static Singleton instance = null;
+    private String categories=null;
+    public  String getCategories(){
+        return categories;
+    }
+    public  void setCategories(String cat){
+        categories=cat;
+    }
     private Boolean update = false;
     private Notes note = null;
 

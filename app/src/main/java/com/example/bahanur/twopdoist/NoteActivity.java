@@ -69,7 +69,7 @@ public class NoteActivity extends Activity {
 
     private  NoteAdapter getNoteCategories() throws SQLException {
         NoteDao noteDao = new NoteDao(getApplicationContext());
-        List<Notes> noteList = noteDao.getNotes("work");
+        List<Notes> noteList = noteDao.getNotes(Singleton.getInstance().getCategories().toString()); //burada work shopping diye verdim
         NoteAdapter adapter = new  NoteAdapter(this,noteList);
         return adapter;
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.example.bahanur.database.DatabaseHelper;
 import com.example.bahanur.model.Notes;
+import com.example.bahanur.singleton.Singleton;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
@@ -40,7 +41,7 @@ public class NoteDao {
 
     public List<Notes> getNotes(String cotegorie) throws SQLException {
 
-        List<Notes> notesList = noteDao.queryForAll();
+        List<Notes> notesList = noteDao.queryForEq("categorie",Singleton.getInstance().getCategories());
         return notesList;
     }
 }

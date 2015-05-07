@@ -56,7 +56,7 @@ public class NotEditActivity extends Activity {
                     note.setTitle(mTitleText.getText().toString());
                     note.setIcerik(mBodyText.getText().toString());
                     note.setTarih(new Date());
-                    note.setCategorie("work");
+                    note.setCategorie(Singleton.getInstance().getCategories());
                     note.setZaman("Deneme");
                     dao.addNote(note);
                 }
