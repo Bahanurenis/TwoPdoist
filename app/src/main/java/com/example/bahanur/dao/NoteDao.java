@@ -33,6 +33,11 @@ public class NoteDao {
 
     }
 
+    public void updateNote(Notes note) throws SQLException {
+        noteDao.update(note);
+        OpenHelperManager.releaseHelper();
+    }
+
     public List<Notes> getNotes(String cotegorie) throws SQLException {
 
         List<Notes> notesList = noteDao.queryForAll();
