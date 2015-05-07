@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -13,6 +14,7 @@ import com.example.bahanur.adapters.NoteAdapter;
 import com.example.bahanur.dao.NoteCategoryDao;
 import com.example.bahanur.dao.NoteDao;
 import com.example.bahanur.model.Notes;
+import com.example.bahanur.singleton.Singleton;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -20,12 +22,13 @@ import java.util.List;
 
 public class NoteActivity extends Activity {
 
+    ListView noteListView = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
         try{
-            ListView noteListView = (ListView) findViewById(R.id.noteList);
+             noteListView = (ListView) findViewById(R.id.noteList);
             NoteAdapter adapter  = getNoteCategories();
             noteListView.setAdapter(adapter);
         }catch (Exception ex){
@@ -37,6 +40,16 @@ public class NoteActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),NotEditActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Singleton.getInstance().setNote((Notes) parent.getItemAtPosition(position));
+                Singleton.getInstance().setUpdate(true);
+                Intent myIntent = new Intent(NoteActivity.this, NotEditActivity.class);
+                startActivity(myIntent);
             }
         });
     }
@@ -58,7 +71,6 @@ public class NoteActivity extends Activity {
         NoteDao noteDao = new NoteDao(getApplicationContext());
         List<Notes> noteList = noteDao.getNotes("work");
         NoteAdapter adapter = new  NoteAdapter(this,noteList);
-        adapter.addAll(noteList);
         return adapter;
     }
 

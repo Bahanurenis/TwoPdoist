@@ -10,7 +10,9 @@ import android.widget.EditText;
 
 import com.example.bahanur.dao.NoteDao;
 import com.example.bahanur.model.Notes;
+import com.example.bahanur.singleton.Singleton;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 
@@ -29,17 +31,36 @@ public class NotEditActivity extends Activity {
         mTitleText = (EditText)findViewById(R.id.noteTitle);
         mBodyText = (EditText) findViewById(R.id.notedesc);
         saveButton = (Button) findViewById(R.id.savenote);
+        if(Singleton.getInstance().isUpdate()){
+            Notes note = Singleton.getInstance().getNote();
+            mTitleText.setText(note.getTitle());
+            mBodyText.setText(note.getIcerik());
+
+        }
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Notes note = new Notes();
-                note.setTitle(mTitleText.getText().toString());
-                note.setIcerik(mBodyText.getText().toString());
-                note.setTarih(new Date());
-                note.setCategorie("work");
-                note.setZaman("Deneme");
                 NoteDao dao = new NoteDao(getApplicationContext());
-                dao.addNote(note);
+                if(Singleton.getInstance().isUpdate()){
+                    Singleton.getInstance().getNote().setIcerik(mBodyText.getText().toString());
+                    Singleton.getInstance().getNote().setTitle(mTitleText.getText().toString());
+                    try {
+                        dao.updateNote(Singleton.getInstance().getNote());
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    Singleton.getInstance().setNote(null);
+                    Singleton.getInstance().setUpdate(false);
+                }else{
+                    Notes note = new Notes();
+                    note.setTitle(mTitleText.getText().toString());
+                    note.setIcerik(mBodyText.getText().toString());
+                    note.setTarih(new Date());
+                    note.setCategorie("work");
+                    note.setZaman("Deneme");
+                    dao.addNote(note);
+                }
+
                 finish();
             }
         });
