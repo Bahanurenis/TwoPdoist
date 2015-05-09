@@ -8,7 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.bahanur.common.Task;
+
+import com.example.bahanur.model.Task;
 
 import java.util.Calendar;
 import java.util.List;

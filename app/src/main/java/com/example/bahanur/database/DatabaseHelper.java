@@ -33,6 +33,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Category,Integer> categoryDao=null;
     private RuntimeExceptionDao<Category,Integer> categoryRuntimeExceptionDao=null;
 
+    private Dao<Task,Integer> taskDao=null;
+    private RuntimeExceptionDao<Task,Integer> taskRuntimeExceptionDao=null;
+
     public  DatabaseHelper(Context context ){
         super(context,DATABASE_NAME,null,DATABASE_VERSION, R.raw.ormlite_config);
     }
@@ -118,6 +121,20 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             categoryRuntimeExceptionDao=getRuntimeExceptionDao(Category.class);
         }
         return categoryRuntimeExceptionDao;
+    }
+
+    public Dao<Task,Integer> getTaskDao() throws SQLException{
+        if(taskDao==null){
+            taskDao=getDao(Task.class);
+        }
+        return taskDao;
+    }
+
+    public  RuntimeExceptionDao<Task,Integer>getTaskRuntimeExceptionDao(){
+        if(taskRuntimeExceptionDao==null){
+            taskRuntimeExceptionDao=getRuntimeExceptionDao(Task.class);
+        }
+        return taskRuntimeExceptionDao;
     }
 
 }

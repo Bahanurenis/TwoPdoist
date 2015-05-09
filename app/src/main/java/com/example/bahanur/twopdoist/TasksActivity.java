@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.example.bahanur.Alarm.AlarmController;
 import com.example.bahanur.common.AppConst;
 import com.example.bahanur.common.OnDataSourceChangeListener;
-import com.example.bahanur.common.Task;
+import com.example.bahanur.model.Task;
 
 import java.io.IOException;
 import java.util.ArrayList;

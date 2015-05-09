@@ -1,4 +1,4 @@
-package com.example.bahanur.data;
+package com.example.bahanur.dao;
 
 
 import com.example.bahanur.model.Category;

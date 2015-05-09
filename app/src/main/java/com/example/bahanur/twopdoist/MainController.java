@@ -8,12 +8,12 @@ import android.widget.Toast;
 
 import com.example.bahanur.Alarm.AlarmController;
 import com.example.bahanur.common.OnDataSourceChangeListener;
-import com.example.bahanur.common.Task;
-import com.example.bahanur.data.CategoriesDAO;
-import com.example.bahanur.data.CategoriesIDAO;
-import com.example.bahanur.data.TasksDAO;
-import com.example.bahanur.data.TasksIDAO;
+import com.example.bahanur.dao.CategoriesDAO;
+import com.example.bahanur.dao.CategoriesIDAO;
+import com.example.bahanur.dao.TasksDAO;
+import com.example.bahanur.dao.TasksIDAO;
 import com.example.bahanur.model.Category;
+import com.example.bahanur.model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,7 +35,7 @@ public class MainController {
     public MainController(Context context) {
         this.context = context;
         cDao = new CategoriesDAO(context.getApplicationContext());
-        tDao = TasksDAO.getInstatnce(context.getApplicationContext());
+        tDao = new TasksDAO(context.getApplicationContext());
         alarmController = new AlarmController(context);
     }
 
@@ -51,9 +51,9 @@ public class MainController {
                 }
                 return categoryTasks;
             }
-            tDao.open();
+
             List<Task> tl = tDao.getNotCompletedTasks(categoryName);
-            tDao.close();
+
             PopulatetasksCache(tl);
             return tl;
         }
@@ -76,9 +76,7 @@ public class MainController {
                 }
                 return categoryTasks;
             }
-            tDao.open();
             List<Task> tl = tDao.getCompletedTasks();
-            tDao.close();
             PopulatetasksCache(tl);
             return tl;
         }
@@ -126,9 +124,7 @@ public class MainController {
 
     public int addTask(Task t, String categoryName) {
         try {
-            tDao.open();
             Task retTask = tDao.addTask(t, categoryName);
-            tDao.close();
             if(retTask == null) return -1;
             if(tasks.containsKey(retTask.getId())) {
                 return -1;
@@ -160,13 +156,9 @@ public class MainController {
 
     public void removeTask(Task t) {
         try {
-            //open the database connection
-            tDao.open();
             tDao.removeTask(t);
             //remove from the local cache.
             removeFronCache(t);
-            //close the connection.
-            tDao.close();
             invokeDataSourceChanged();
 
         }
@@ -178,14 +170,12 @@ public class MainController {
     public void removeCategory(Category c) {
         try {
             List<Task> tasksToRemove = getNotCompletedTasks(c.getCategoryName());
-            tDao.open();
             for (Task t : tasksToRemove) {
                 if (t.getTimeToAlarm() > 0) {
                     alarmController.cancelAlarm(t.getId());
                 }
                 tDao.removeTask(t);
             }
-            tDao.close();
             removeCategoryFromCache(c);
             cDao.removeCategory(c);
             invokeDataSourceChanged();
@@ -199,10 +189,8 @@ public class MainController {
         try {
             Task task = tasks.get(t.getId());
             task.setCompleted(1);
-            tDao.open();
             tDao.markTaskAsDone(task);
             tDao.editTask(task);
-            tDao.close();
             invokeDataSourceChanged();
         }
         catch (Exception e) {
@@ -216,10 +204,8 @@ public class MainController {
         try {
             Task task = tasks.get(t.getId());
             task.setCompleted(0);
-            tDao.open();
             tDao.getTaskBack(task);
             tDao.editTask(task);
-            tDao.close();
             invokeDataSourceChanged();
         }
         catch (Exception e) {
@@ -230,11 +216,9 @@ public class MainController {
 
     public void editTask(Task t) {
         try {
-            tDao.open();
             Log.i(TAG, "inside the editTask");
             tDao.editTask(t);
             updateCache(t);
-            tDao.close();
             invokeDataSourceChanged();
         }
         catch (Exception e) {

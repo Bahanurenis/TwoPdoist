@@ -10,7 +10,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import com.example.bahanur.common.OnDataSourceChangeListener;
-import com.example.bahanur.common.Task;
+import com.example.bahanur.model.Task;
 
 import java.util.List;
 

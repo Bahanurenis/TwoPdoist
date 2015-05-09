@@ -1,14 +1,14 @@
-package com.example.bahanur.data;
+package com.example.bahanur.dao;
 
 
-import com.example.bahanur.common.Task;
+
+import com.example.bahanur.model.Task;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public interface TasksIDAO {
-    void open() throws SQLException;
-    void close();
+
     List<Task> getNotCompletedTasks(String category);
     List<Task> getCompletedTasks();
     void removeTask(Task task);

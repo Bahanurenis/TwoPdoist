@@ -1,17 +1,12 @@
-package com.example.bahanur.data;
+package com.example.bahanur.dao;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 import com.example.bahanur.database.DatabaseHelper;
 import com.example.bahanur.model.Category;
-import com.example.bahanur.model.Notes;
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +34,7 @@ public class CategoriesDAO implements CategoriesIDAO{
         }
 
        Category newCategory = categoryDao.queryForEq("categoryName", category.getCategoryName()).get(0);
+        OpenHelperManager.releaseHelper();
         return newCategory;
     }
 
