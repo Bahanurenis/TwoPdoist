@@ -7,13 +7,13 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.bahanur.Alarm.AlarmController;
-import com.example.bahanur.common.Category;
 import com.example.bahanur.common.OnDataSourceChangeListener;
 import com.example.bahanur.common.Task;
 import com.example.bahanur.data.CategoriesDAO;
 import com.example.bahanur.data.CategoriesIDAO;
 import com.example.bahanur.data.TasksDAO;
 import com.example.bahanur.data.TasksIDAO;
+import com.example.bahanur.model.Category;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +34,7 @@ public class MainController {
 
     public MainController(Context context) {
         this.context = context;
-        cDao = CategoriesDAO.getInstatnce(context.getApplicationContext());
+        cDao = new CategoriesDAO(context.getApplicationContext());
         tDao = TasksDAO.getInstatnce(context.getApplicationContext());
         alarmController = new AlarmController(context);
     }
@@ -94,9 +94,7 @@ public class MainController {
             if (allCategories != null) {
                 return new ArrayList<>(allCategories);
             }
-            cDao.open();
             List<Category> cl = cDao.getCategories();
-            cDao.close();
             populateCategoriesCache(cl);
             return cl;
         }
@@ -147,9 +145,7 @@ public class MainController {
 
     public void addCategory(Category c) {
         try {
-            cDao.open();
             Category retCat = cDao.addCategory(c);
-            cDao.close();
             if (retCat == null) return;
             if (allCategories.contains(retCat.getCategoryName())) {
                 return;
@@ -191,9 +187,7 @@ public class MainController {
             }
             tDao.close();
             removeCategoryFromCache(c);
-            cDao.open();
             cDao.removeCategory(c);
-            cDao.close();
             invokeDataSourceChanged();
         }
         catch (Exception e) {

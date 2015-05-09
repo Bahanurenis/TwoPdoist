@@ -15,8 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.bahanur.common.AppConst;
-import com.example.bahanur.common.Category;
 import com.example.bahanur.common.OnDataSourceChangeListener;
+import com.example.bahanur.model.Category;
 
 
 public class ListMainActivity extends Activity implements OnDataSourceChangeListener {

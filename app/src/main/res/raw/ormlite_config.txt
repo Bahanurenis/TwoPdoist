@@ -1,5 +1,5 @@
 #
-# generated on 2015/05/03 10:18:59
+# generated on 2015/05/09 10:42:47
 #
 # --table-start--
 dataClass=com.example.bahanur.model.NoteCategory
@@ -37,6 +37,52 @@ fieldName=zaman
 # --field-end--
 # --field-start--
 fieldName=categorie
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.bahanur.model.Category
+tableName=category
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=categoryName
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=com.example.bahanur.model.Task
+tableName=task
+# --table-fields-start--
+# --field-start--
+fieldName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=taskName
+# --field-end--
+# --field-start--
+fieldName=taskNote
+# --field-end--
+# --field-start--
+fieldName=priority
+# --field-end--
+# --field-start--
+fieldName=category
+# --field-end--
+# --field-start--
+fieldName=completed
+# --field-end--
+# --field-start--
+fieldName=timeToAlarm
+# --field-end--
+# --field-start--
+fieldName=taskLocation
 # --field-end--
 # --table-fields-end--
 # --table-end--

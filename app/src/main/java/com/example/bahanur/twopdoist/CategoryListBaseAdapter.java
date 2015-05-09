@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.example.bahanur.common.Category;
+import com.example.bahanur.model.Category;
 
 import java.util.List;
 

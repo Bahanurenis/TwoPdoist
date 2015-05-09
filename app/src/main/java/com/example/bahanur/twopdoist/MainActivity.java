@@ -24,9 +24,6 @@ import java.util.List;
 public class MainActivity extends Activity {
 
 
-    private ActionBarDrawerToggle mDrawerToggle;
-
-
     private CharSequence mTitle;
 
 

@@ -4,8 +4,10 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.bahanur.model.Category;
 import com.example.bahanur.model.NoteCategory;
 import com.example.bahanur.model.Notes;
+import com.example.bahanur.model.Task;
 import com.example.bahanur.twopdoist.R;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
@@ -28,6 +30,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     private Dao<Notes,Integer> noteDao=null;//Note için dao oluşturdum
     private RuntimeExceptionDao<Notes,Integer> noteRuntimeExceptionDao=null;//Run time exception oluşturdum
 
+    private Dao<Category,Integer> categoryDao=null;
+    private RuntimeExceptionDao<Category,Integer> categoryRuntimeExceptionDao=null;
+
     public  DatabaseHelper(Context context ){
         super(context,DATABASE_NAME,null,DATABASE_VERSION, R.raw.ormlite_config);
     }
@@ -37,10 +42,11 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
 
         try{
 
-            Log.i(DatabaseHelper.class.getName(),"onCreate");
-            TableUtils.createTable(connectionSource,Notes.class);
+            Log.i(DatabaseHelper.class.getName(), "onCreate");
+            TableUtils.createTable(connectionSource, Notes.class);
             TableUtils.createTable(connectionSource, NoteCategory.class);
-
+            TableUtils.createTable(connectionSource, Category.class);
+            TableUtils.createTable(connectionSource, Task.class);
         }
         catch (SQLException ex){
             Log.e(DatabaseHelper.class.getName(),"can not create database");
@@ -53,10 +59,12 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
 
-        Log.i(DatabaseHelper.class.getName(),"onUprage");
+        Log.i(DatabaseHelper.class.getName(), "onUprage");
         try {
             TableUtils.dropTable(connectionSource,Notes.class,true);
             TableUtils.dropTable(connectionSource,NoteCategory.class,true);
+            TableUtils.createTable(connectionSource, Category.class);
+            TableUtils.createTable(connectionSource, Task.class);
             onCreate(database,connectionSource);
         } catch (SQLException ex) {
             Log.e(DatabaseHelper.class.getName(), "can not drop database");
@@ -96,6 +104,20 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             noteRuntimeExceptionDao=getRuntimeExceptionDao(Notes.class); //parametre verince hata veriyo
         }
         return noteRuntimeExceptionDao;
+    }
+
+    public Dao<Category,Integer> getCategoryDao() throws SQLException{
+        if(categoryDao==null){
+            categoryDao=getDao(Category.class);
+        }
+        return categoryDao;
+    }
+
+    public  RuntimeExceptionDao<Category,Integer>getCategoryRuntimeExceptionDao(){
+        if(categoryRuntimeExceptionDao==null){
+            categoryRuntimeExceptionDao=getRuntimeExceptionDao(Category.class);
+        }
+        return categoryRuntimeExceptionDao;
     }
 
 }
