@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ff7cdca8">
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="@dimen/activity_horizontal_margin"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textViewTop"
@@ -11,37 +15,25 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:paddingBottom="35dp" />
-
     <ListView
-        android:id="@+id/noteList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/btmLayout"
-        android:layout_below="@+id/textViewTop"
-        android:background="#fffdffc3"
-        android:divider="#ffffcf78"
-        android:dividerHeight="1sp"
-        android:footerDividersEnabled="true"
-        tools:listitem="@android:layout/simple_list_item_2"
-        android:choiceMode="singleChoice" />
-
-    <LinearLayout
-        android:id="@+id/btmLayout"
-        android:layout_width="fill_parent"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="3dp"
-        android:layout_marginTop="10dp">
+        android:id="@+id/noteList"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:choiceMode="singleChoice"/>
 
 
         <Button
             android:id="@+id/addnotebutton"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content" />
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:text="add" />
 
-    </LinearLayout>
 
 
 </RelativeLayout>

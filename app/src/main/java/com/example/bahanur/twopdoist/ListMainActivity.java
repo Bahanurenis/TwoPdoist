@@ -43,7 +43,7 @@ public class ListMainActivity extends Activity implements OnDataSourceChangeList
             categoryLv.setOnTouchListener(new OnSwipeTouchListener(this,categoryLv){
                 public void onSwipeLeft(int position) { //delete category and all the tasks inside it
                     Category c = (Category) adapter.getItem(position);
-                    controller.categoryDeleteConfirmation(c); //controller will handle what happens next
+                    controller.categoryDeleteConfirmation(c);
                 }
             });
 

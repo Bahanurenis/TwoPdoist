@@ -59,16 +59,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <ImageButton
-        android:id="@+id/addLocationButton"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:onClick="addLocation"
-        android:src="@drawable/add_location_button"
-        android:background="@null"
-        android:layout_alignTop="@+id/showPickersButton"
-        android:layout_toLeftOf="@+id/addTaskButton"
-        android:layout_toStartOf="@+id/addTaskButton" />
+
 
     <EditText
         android:id="@+id/editTextWhereAlarm"
