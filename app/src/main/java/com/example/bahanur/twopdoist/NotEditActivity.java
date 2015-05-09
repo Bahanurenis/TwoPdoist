@@ -1,6 +1,7 @@
 package com.example.bahanur.twopdoist;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -61,7 +62,8 @@ public class NotEditActivity extends Activity {
                     dao.addNote(note);
                 }
 
-                finish();
+                Intent myIntent = new Intent(NotEditActivity.this, NoteActivity.class);
+                startActivity(myIntent);
             }
         });
 

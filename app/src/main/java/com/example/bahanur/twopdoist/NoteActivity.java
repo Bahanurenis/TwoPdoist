@@ -54,9 +54,11 @@ public class NoteActivity extends Activity {
         });
     }
 
-    private void insertNoteCategory(){
+
+    private void insertNoteCategory() throws SQLException {
         NoteCategoryDao dao = new NoteCategoryDao(getApplicationContext());
         dao.addNoteCategory();
+        getNoteCategories();
     }
 
     @Override
@@ -69,7 +71,7 @@ public class NoteActivity extends Activity {
 
     private  NoteAdapter getNoteCategories() throws SQLException {
         NoteDao noteDao = new NoteDao(getApplicationContext());
-        List<Notes> noteList = noteDao.getNotes(Singleton.getInstance().getCategories().toString()); //burada work shopping diye verdim
+        List<Notes> noteList = noteDao.getNotes(); //burada work shopping diye verdim
         NoteAdapter adapter = new  NoteAdapter(this,noteList);
         return adapter;
     }

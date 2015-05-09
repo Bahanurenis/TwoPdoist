@@ -39,9 +39,9 @@ public class NoteDao {
         OpenHelperManager.releaseHelper();
     }
 
-    public List<Notes> getNotes(String cotegorie) throws SQLException {
+    public List<Notes> getNotes() throws SQLException {
 
-        List<Notes> notesList = noteDao.queryForEq("categorie",Singleton.getInstance().getCategories());
+        List<Notes> notesList = noteDao.queryForAll();
         return notesList;
     }
 }

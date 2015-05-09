@@ -10,6 +10,7 @@
     <string name="no_title">No Title</string>
     <string name="title">Title</string>
     <string name="edit_note">Edit Note</string>
+    <string name="notes_button">Notes</string>
 
     <string name="save_menu_noteedit">Save</string>
 
@@ -18,5 +19,23 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_not_edit">NotEditActivity</string>
+
+    <string name="title_activity_add_task">AddTaskActivity</string>
+    <string name="taskName">Task Name</string>
+    <string name="taskNote">Task Note</string>
+    <string name="taskCategory">Task Category</string>
+    <string name="pick_time">Pick Time</string>
+    <string name="categoryName">Category Name</string>
+    <string name="taskPriority">Priority</string>
+    <string name="action_search">Search</string>
+    <string name="action_add">Add</string>
+    <string name="action_see_completed">Completed Tasks</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_tasks">TasksActivity</string>
+    <string name="title_activity_add_category">AddCategoryActivity</string>
+    <string name="title_activity_list_main">ListMaintActivity</string>
+    <string name="title_activity_completed_tasks">CompletedTasksActivity</string>
+    <string name="title_activity_edit_task">EditTaskActivity</string>
+    <string name="title_activity_splash">Splash</string>
 
 </resources>

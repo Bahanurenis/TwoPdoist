@@ -4,6 +4,20 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -34,6 +48,47 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.bahanur.twopdoist.NoteActivity" />
         </activity>
+
+        <activity
+            android:name="com.example.bahanur.twopdoist.AddTaskActivity"
+            android:label="@string/title_activity_add_task" >
+        </activity>
+
+        <activity
+            android:name="com.example.bahanur.twopdoist.ListMainActivity"
+            android:label="@string/title_activity_list_main"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.bahanur.twopdoist.MainActivity" />
+        </activity>
+
+        <activity
+            android:name="com.example.bahanur.twopdoist.TasksActivity"
+            android:label="@string/title_activity_tasks" >
+        </activity>
+        <activity
+            android:name="com.example.bahanur.twopdoist.AddCategoryActivity"
+            android:label="@string/title_activity_add_category" >
+        </activity>
+        <activity
+            android:name="com.example.bahanur.twopdoist.CompletedTasksActivity"
+            android:label="@string/title_activity_completed_tasks" >
+        </activity>
+        <activity
+            android:name="com.example.bahanur.twopdoist.EditTaskActivity"
+            android:label="@string/title_activity_edit_task" >
+        </activity>
+
+        <receiver
+            android:name="com.example.bahanur.Alarm.NotificationBroadCastReciever"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="il.ac.bahanur.ALARM" >
+                </action>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
